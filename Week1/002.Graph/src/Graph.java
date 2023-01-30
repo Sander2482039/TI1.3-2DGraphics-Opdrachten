@@ -20,6 +20,20 @@ public class Graph extends Application {
     
     
     public void draw(FXGraphics2D graphics) {
+
+        graphics.translate(960, 540);
+        graphics.scale(1, -1);
+
+        double resolution = 0.1;
+        double scale = 100;
+        double lastY = Math.pow(-10,3);
+
+
+        for (double x = -10; x < 10 ; x += resolution) {
+            float y = (float) Math.pow(x, 3);
+            graphics.draw(new Line2D.Double(x*scale, y*scale, (x-resolution)*scale, lastY*scale));
+            lastY = y;
+        }
     }
     
     
