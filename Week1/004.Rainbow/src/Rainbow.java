@@ -20,7 +20,24 @@ public class Rainbow extends Application {
     
     
     public void draw(FXGraphics2D graphics) {
+        graphics.translate(960,540);
+        graphics.scale(1,-1);
 
+        int scale = 1;
+
+        float radiusBinnen = 300;
+        float radiusBuiten = radiusBinnen + 10;
+
+        for(float i = 0; i < 500; i++) {
+
+            float x1 = radiusBinnen * (float)Math.cos(i);
+            float y1 = radiusBinnen * (float)Math.sin(i);
+            float x2 = radiusBuiten * (float)Math.cos(i);
+            float y2 = radiusBuiten * (float)Math.sin(i);
+
+            graphics.setColor(Color.getHSBColor(i/500.0f, 1, 1));
+            graphics.draw(new Line2D.Float(x1,y1,x2,y2));
+        }
     }
     
     

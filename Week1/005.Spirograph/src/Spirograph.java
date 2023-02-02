@@ -46,8 +46,32 @@ public class Spirograph extends Application {
     public void draw(FXGraphics2D graphics) {
         //you can use Double.parseDouble(v1.getText()) to get a double value from the first textfield
         //feel free to add more textfields or other controls if needed, but beware that swing components might clash in naming
+
+        graphics.translate(960, 540);
+        graphics.scale(1,-1);
+        float resolution = 0.01f;
+        float scale = 50f;
+
+        for (float i = 0; i < 1500; i+=resolution) {
+            float x1 = formulaX(i);
+            float x2 = x1 + resolution;
+            float y1 = formulaY(i);
+            float y2 = y1 + resolution;
+
+            graphics.setColor(Color.getHSBColor(i, 1, 1));
+            graphics.draw(new Line2D.Float(x1*scale,y1*scale,x2*scale,y2*scale));
+        }
     }
-    
+
+    private float formulaX(float x){
+
+       return 4.0f * (float)Math.cos(6.7 * x) + 4.6f  * (float)Math.cos(2.5 * x);
+    }
+
+    private float formulaY(float y)
+    {
+        return 4.0f * (float)Math.cos(8.7 * y) + 4.6f  * (float)Math.cos(8.5 * y);
+    }
     
     
     public static void main(String[] args) {
