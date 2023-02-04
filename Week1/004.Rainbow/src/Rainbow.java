@@ -23,25 +23,35 @@ public class Rainbow extends Application {
         graphics.translate(960,540);
         graphics.scale(1,-1);
 
-        int scale = 1;
+        float scale = 3.13f;
+        float resolution = 0.0001f;
+        float radiusBinnen = 350;
+        float radiusBuiten = radiusBinnen + 100.0f;
+        float rainbowlimit = 0.0f;
 
-        float radiusBinnen = 300;
-        float radiusBuiten = radiusBinnen + 10;
+        for(float i = 0.0f; i < 500.0f; i+=resolution) {
 
-        for(float i = 0; i < 500; i++) {
+            float x1 = radiusBinnen * (float)Math.cos(i * scale);
+            float y1 = radiusBinnen * (float)Math.sin(i * scale);
+            float x2 = radiusBuiten * (float)Math.cos(i * scale);
+            float y2 = radiusBuiten * (float)Math.sin(i * scale);
 
-            float x1 = radiusBinnen * (float)Math.cos(i);
-            float y1 = radiusBinnen * (float)Math.sin(i);
-            float x2 = radiusBuiten * (float)Math.cos(i);
-            float y2 = radiusBuiten * (float)Math.sin(i);
+            graphics.setColor(Color.getHSBColor(i, 1, 1));
+            graphics.drawLine((int) x1 ,(int) y1 ,(int) x2 ,(int) y2 );
 
-            graphics.setColor(Color.getHSBColor(i/500.0f, 1, 1));
-            graphics.draw(new Line2D.Float(x1,y1,x2,y2));
+            rainbowlimit++;
+            if (isRainbow(rainbowlimit)){
+                break;
+            }
         }
     }
-    
-    
-    
+
+    private boolean isRainbow(float value){
+        if (value == 10000){
+            return true;
+        }else return false;
+    }
+
     public static void main(String[] args) {
         launch(Rainbow.class);
     }
