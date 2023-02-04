@@ -26,15 +26,16 @@ public class Spirograph extends Application {
         mainBox.getChildren().add(topBar);
         mainBox.getChildren().add(new Group(canvas));
         
-        topBar.getChildren().add(v1 = new TextField("300"));
+        topBar.getChildren().add(v1 = new TextField("4.9"));
         topBar.getChildren().add(v2 = new TextField("1"));
-        topBar.getChildren().add(v3 = new TextField("300"));
+        topBar.getChildren().add(v3 = new TextField("6.4"));
         topBar.getChildren().add(v4 = new TextField("10"));
                 
         v1.textProperty().addListener(e -> draw(new FXGraphics2D(canvas.getGraphicsContext2D())));
         v2.textProperty().addListener(e -> draw(new FXGraphics2D(canvas.getGraphicsContext2D())));
         v3.textProperty().addListener(e -> draw(new FXGraphics2D(canvas.getGraphicsContext2D())));
         v4.textProperty().addListener(e -> draw(new FXGraphics2D(canvas.getGraphicsContext2D())));
+
         
         draw(new FXGraphics2D(canvas.getGraphicsContext2D()));
         primaryStage.setScene(new Scene(mainBox));
@@ -47,30 +48,41 @@ public class Spirograph extends Application {
         //you can use Double.parseDouble(v1.getText()) to get a double value from the first textfield
         //feel free to add more textfields or other controls if needed, but beware that swing components might clash in naming
 
-        graphics.translate(960, 540);
-        graphics.scale(1,-1);
-        float resolution = 0.01f;
-        float scale = 50f;
 
-        for (float i = 0; i < 1500; i+=resolution) {
+        float resolution = 0.001f;
+        int scale = 35;
+
+
+        for (float i = 0; i < 20; i+=resolution) {
             float x1 = formulaX(i);
             float x2 = x1 + resolution;
             float y1 = formulaY(i);
             float y2 = y1 + resolution;
 
             graphics.setColor(Color.getHSBColor(i, 1, 1));
-            graphics.draw(new Line2D.Float(x1*scale,y1*scale,x2*scale,y2*scale));
+            graphics.draw(new Line2D.Double(x1*scale,y1*scale,x2*scale,y2*scale));
+
         }
+
     }
 
     private float formulaX(float x){
+        double parameter1 = Double.parseDouble(v1.getText());
+        double parameter2 = Double.parseDouble(v2.getText());
+        double parameter3 = Double.parseDouble(v3.getText());
+        double parameter4 = Double.parseDouble(v4.getText());
 
-       return 4.0f * (float)Math.cos(6.7 * x) + 4.6f  * (float)Math.cos(2.5 * x);
+       return (float)parameter1 * (float)Math.cos(parameter2 * x) + (float) parameter3  * (float)Math.cos(parameter4 * x);
     }
 
     private float formulaY(float y)
     {
-        return 4.0f * (float)Math.cos(8.7 * y) + 4.6f  * (float)Math.cos(8.5 * y);
+        double parameter1 = Double.parseDouble(v1.getText());
+        double parameter2 = Double.parseDouble(v2.getText());
+        double parameter3 = Double.parseDouble(v3.getText());
+        double parameter4 = Double.parseDouble(v4.getText());
+
+        return ((float) parameter1 * (float)Math.sin(parameter2 * y)) + ((float) parameter3  * (float)Math.sin(parameter4 * y));
     }
     
     
