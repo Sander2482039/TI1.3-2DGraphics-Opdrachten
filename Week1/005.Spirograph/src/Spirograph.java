@@ -20,7 +20,7 @@ public class Spirograph extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Canvas canvas = new Canvas(1920, 1080);
-       
+
         VBox mainBox = new VBox();
         HBox topBar = new HBox();
         mainBox.getChildren().add(topBar);
@@ -36,8 +36,10 @@ public class Spirograph extends Application {
         v3.textProperty().addListener(e -> draw(new FXGraphics2D(canvas.getGraphicsContext2D())));
         v4.textProperty().addListener(e -> draw(new FXGraphics2D(canvas.getGraphicsContext2D())));
 
-        
-        draw(new FXGraphics2D(canvas.getGraphicsContext2D()));
+        FXGraphics2D fxGraphics2D = new FXGraphics2D(canvas.getGraphicsContext2D());
+        fxGraphics2D.translate(960,540);
+        draw(fxGraphics2D);
+
         primaryStage.setScene(new Scene(mainBox));
         primaryStage.setTitle("Spirograph");
         primaryStage.show();
@@ -47,13 +49,11 @@ public class Spirograph extends Application {
     public void draw(FXGraphics2D graphics) {
         //you can use Double.parseDouble(v1.getText()) to get a double value from the first textfield
         //feel free to add more textfields or other controls if needed, but beware that swing components might clash in naming
-
-
-        float resolution = 0.001f;
+        float resolution = 0.0001f;
         int scale = 35;
 
-
         for (float i = 0; i < 20; i+=resolution) {
+
             float x1 = formulaX(i);
             float x2 = x1 + resolution;
             float y1 = formulaY(i);
@@ -61,7 +61,6 @@ public class Spirograph extends Application {
 
             graphics.setColor(Color.getHSBColor(i, 1, 1));
             graphics.draw(new Line2D.Double(x1*scale,y1*scale,x2*scale,y2*scale));
-
         }
 
     }
