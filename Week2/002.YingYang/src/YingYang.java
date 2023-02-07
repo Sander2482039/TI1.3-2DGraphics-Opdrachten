@@ -34,35 +34,29 @@ public class YingYang extends Application {
         graphics.setBackground(Color.white);
         graphics.clearRect(0, 0, (int) canvas.getWidth(), (int) canvas.getHeight());
 
-        GeneralPath path = new GeneralPath();
-        path.moveTo(75,110);
-        path.lineTo(575,110);
+        Area rectangle = new Area(new Rectangle2D.Double(325, 0, 400, 600));
 
         Area a = new Area(new Ellipse2D.Double(75,0,500,500));
-        Area b = new Area(new Ellipse2D.Double(75,0,500,500));
+        Area intersect = new Area(rectangle);
+        intersect.intersect(a);
+
         Area c = new Area(new Ellipse2D.Double(200,0, 250,250));
         Area d = new Area(new Ellipse2D.Double(200,250, 250,250));
         Area e = new Area(new Ellipse2D.Double(300,90, 50,50));
         Area f = new Area(new Ellipse2D.Double(300,370, 50,50));
 
-        Area subtract = new Area(a);
-        subtract.subtract(c);
-        subtract.subtract(d);
-        subtract.subtract(b);
 
         graphics.setColor(Color.black);
-        graphics.fill(a);
         graphics.fill(d);
+        graphics.fill(intersect);
 
         graphics.setColor(Color.white);
         graphics.fill(c);
-        graphics.fill(subtract);
         graphics.fill(f);
+
         graphics.setColor(Color.black);
         graphics.fill(e);
-
-        graphics.setColor(Color.blue);
-        graphics.draw(path);
+        graphics.draw(a);
     }
 
 
