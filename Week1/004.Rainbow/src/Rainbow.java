@@ -23,7 +23,7 @@ public class Rainbow extends Application {
         graphics.translate(960,540);
         graphics.scale(1,-1);
 
-        float scale = 3.13f;
+        float scale = (float) Math.PI;
         float resolution = 0.0001f;
         float radiusBinnen = 350;
         float radiusBuiten = radiusBinnen + 100.0f;
