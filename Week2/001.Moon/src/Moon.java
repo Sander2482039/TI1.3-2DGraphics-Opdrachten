@@ -33,6 +33,31 @@ public class Moon extends Application {
         graphics.setTransform(new AffineTransform());
         graphics.setBackground(Color.white);
         graphics.clearRect(0, 0, (int) canvas.getWidth(), (int) canvas.getHeight());
+//background
+        GeneralPath path = new GeneralPath();
+        path.moveTo(10,10);
+        path.lineTo(600,10);
+        path.lineTo(600,600);
+        path.lineTo(10,600);
+        path.lineTo(10,10);
+
+        //moon
+        Area a = new Area(new Ellipse2D.Double(60,50,300,300));
+        Area b = new Area(new Ellipse2D.Double(140,60,300,300));
+
+        Area subtract = new Area(b);
+        subtract.subtract(a);
+
+        Area intersect = new Area(a);
+        intersect.intersect(b);
+
+        graphics.setColor(Color.black);
+        graphics.fill(path);
+        graphics.fill(a);
+        graphics.fill(intersect);
+
+        graphics.setColor(Color.yellow);
+        graphics.fill(subtract);
     }
 
 
